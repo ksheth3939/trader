@@ -59,8 +59,8 @@ def trade():
         # print(bought)
       if last_row['RSI Adj'] < 25 and last_row['RSI Adj'] > 0.0 and (comp not in rsi_owned):
         cost = last_row['Adj Close']
-        writ.writerow([dt.datetime.now() - dt.timedelta(hours=4), comp, 'BUY', last_row['RSI Adj'], 0, cost,'RSI'])
-        rsi_owned.append(comp)
+        #writ.writerow([dt.datetime.now() - dt.timedelta(hours=4), comp, 'BUY', last_row['RSI Adj'], 0, cost,'RSI'])
+        #rsi_owned.append(comp)
 
 
       stoch_sell = False
@@ -74,16 +74,16 @@ def trade():
 
       if (comp in owned and stoch_sell and last_row['RSI Adj'] < 50 and last_row['MACD'] < last_row['Signal']):
         #sell
-        #print('Sell',comp,last_row['Adj Close'])
-        sold = robin.orders.order_sell_fractional_by_quantity(comp, owned[comp]['quantity'])
-        print(sold, 'sold',type(sold))
-        if sold != None and sold != {}:
-          writ.writerow([dt.datetime.now() - dt.timedelta(hours=4), comp, 'SELL',sold['quantity'], float(sold['quantity']) * last_row['Adj Close'],last_row['Adj Close'],'Stoch'])
+        print('Sell',comp,last_row['Adj Close'])
+        #sold = robin.orders.order_sell_fractional_by_quantity(comp, owned[comp]['quantity'])
+        #print(sold, 'sold',type(sold))
+        #if sold != None and sold != {}:
+        #  writ.writerow([dt.datetime.now() - dt.timedelta(hours=4), comp, 'SELL',sold['quantity'], float(sold['quantity']) * last_row['Adj Close'],last_row['Adj Close'],'Stoch'])
 
       if last_row['RSI Adj'] > 75 and (comp in rsi_owned):
         cost = last_row['Adj Close']
-        writ.writerow([dt.datetime.now() - dt.timedelta(hours=4), comp, 'SELL', last_row['RSI Adj'], 0, cost,'RSI'])
-        rsi_owned.remove(comp)
+        #writ.writerow([dt.datetime.now() - dt.timedelta(hours=4), comp, 'SELL', last_row['RSI Adj'], 0, cost,'RSI'])
+        #rsi_owned.remove(comp)
 
   
 
