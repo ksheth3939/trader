@@ -94,7 +94,7 @@ def trade():
 
     robin.logout()
 
-  with open('rsi.pkl', 'wb') as f:
+  with open('stoch.pkl', 'wb') as f:
     pickle.dump(stoch_owned,f)
 
   f.close()
