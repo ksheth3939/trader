@@ -28,7 +28,7 @@ with open('trades.csv', 'a') as f:
     print(sold, 'sold',type(sold))
 
     if sold != None and sold != {}:
-      writ.writerow([dt.datetime.now() - dt.timedelta(hours=4), comp, 'SELL',sold['quantity'], float(sold['quantity']) * last_row['Adj Close'],last_row['Adj Close'],'RSI'])
+      writ.writerow([dt.datetime.now() - dt.timedelta(hours=4), comp, 'SELL',sold['quantity'], float(sold['quantity']) * last_row['Adj Close'],last_row['Adj Close'],'Stoch'])
 
 
   robin.logout()    
