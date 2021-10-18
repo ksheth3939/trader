@@ -18,7 +18,7 @@ with open('stoch.pkl', 'rb') as f:
 with open('trades.csv', 'a') as f:
   writ = writer(f)
 
-  for comp in stoch_owned:
+  for comp in owned.keys():
     if comp == 'DAL' or comp == 'XOM':
       continue
     df = yf.download(tickers= comp, start= start_date, interval="1h", threads=False).reset_index()
