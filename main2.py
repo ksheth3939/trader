@@ -27,7 +27,7 @@ def trade():
 
     # bought = 0
     for i, comp in enumerate(companies):
-      # print(comp)
+      print(comp)
       df = yf.download(tickers= comp, start= start_date, interval="1h", threads=False).reset_index()
       df = df[['Adj Close','High','Low','Volume']]
 
