@@ -21,6 +21,7 @@ with open('trades.csv', 'a') as f:
 for comp in stoch_owned:
 
   df = yf.download(tickers= comp, start= start_date, interval="1h", threads=False).reset_index()
+  last_row = df.iloc[-1]
 
   sold = robin.orders.order_sell_fractional_by_quantity(comp, owned[comp]['quantity'])
   print(sold, 'sold',type(sold))
