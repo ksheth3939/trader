@@ -18,19 +18,23 @@ with open('stoch.pkl', 'rb') as f:
 with open('trades.csv', 'a') as f:
   writ = writer(f)
 
-for comp in stoch_owned:
-  if comp == 'DAL':
-    continue
-  df = yf.download(tickers= comp, start= start_date, interval="1h", threads=False).reset_index()
-  last_row = df.iloc[-1]
+  for comp in stoch_owned:
+    if comp == 'DAL' or comp == 'XOM':
+      continue
+    df = yf.download(tickers= comp, start= start_date, interval="1h", threads=False).reset_index()
+    last_row = df.iloc[-1]
 
-  sold = robin.orders.order_sell_fractional_by_quantity(comp, owned[comp]['quantity'])
-  print(sold, 'sold',type(sold))
+    sold = robin.orders.order_sell_fractional_by_quantity(comp, owned[comp]['quantity'])
+    print(sold, 'sold',type(sold))
 
-  if sold != None and sold != {}:
-    writ.writerow([dt.datetime.now() - dt.timedelta(hours=4), comp, 'SELL',sold['quantity'], float(sold['quantity']) * last_row['Adj Close'],last_row['Adj Close'],'RSI'])
+    if sold != None and sold != {}:
+      writ.writerow([dt.datetime.now() - dt.timedelta(hours=4), comp, 'SELL',sold['quantity'], float(sold['quantity']) * last_row['Adj Close'],last_row['Adj Close'],'RSI'])
 
-        
+
+  robin.logout()    
 
 with open('stoch.pkl', 'wb') as f:
   pickle.dump([],f)
+
+
+f.close()
