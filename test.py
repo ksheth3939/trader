@@ -19,7 +19,8 @@ with open('trades.csv', 'a') as f:
   writ = writer(f)
 
 for comp in stoch_owned:
-
+  if comp == 'DAL':
+    continue
   df = yf.download(tickers= comp, start= start_date, interval="1h", threads=False).reset_index()
   last_row = df.iloc[-1]
 
