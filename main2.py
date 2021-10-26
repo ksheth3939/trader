@@ -47,7 +47,7 @@ def trade():
           break
 
       last_row = df.iloc[-1]
-      print(last_row['RSI Adj'])
+      #print(last_row['RSI Adj'])
       if stoch_buy and last_row['RSI Adj'] > 50 and last_row['MACD'] > last_row['Signal'] and (comp not in stoch_owned):
         #buy
         cost = last_row['Adj Close']
@@ -74,6 +74,9 @@ def trade():
         elif row['%K'] < 20 or row['%D'] < 20:
           stoch_sell = False
           break
+
+      if comp in owned:
+        print('In Owned', comp, last_row['Adj Close'])
 
       if (comp in stoch_owned and stoch_sell and last_row['RSI Adj'] < 50 and last_row['MACD'] < last_row['Signal']):
         #sell
