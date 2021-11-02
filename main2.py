@@ -76,7 +76,7 @@ def trade():
           break
 
       if comp in owned:
-        print('In Owned', comp, last_row['Adj Close'])
+        print('In Owned', comp, last_row['RSI Adj'])
 
       if (comp in stoch_owned and stoch_sell and last_row['RSI Adj'] < 50 and last_row['MACD'] < last_row['Signal']):
         #sell
