@@ -2,9 +2,9 @@
 import schedule
 import time
 import datetime as dt
-import main2
+import main3
 def job():
-    print(main2.trade())
+    print(main3.trade())
 # def job2():
 #     print(dt.datetime.now())
 
