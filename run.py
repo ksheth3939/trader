@@ -3,12 +3,13 @@ import schedule
 import time
 import datetime as dt
 import main3
+
 def job():
     print(main3.trade())
 # def job2():
 #     print(dt.datetime.now())
 
-for t in ['14:25','15:25','16:25','17:25','18:25','19:25']:
+for t in ['14:55','15:55','16:55','17:55','18:55','19:55']:
     schedule.every().monday.at(t).do(job)
     schedule.every().tuesday.at(t).do(job)
     schedule.every().wednesday.at(t).do(job)

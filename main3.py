@@ -12,13 +12,16 @@ from csv import writer
 companies=list(pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')[0]['Symbol'])
 
 def json_to_list(json):
-  tim = dt.datetime.strptime(json['begins_at'], '%Y-%m-%dT%H:%M:%SZ') - dt.timedelta(hours = 4)
+  tim = dt.datetime.strptime(json['begins_at'], '%Y-%m-%dT%H:%M:%SZ') - dt.timedelta(hours = 5)
   return [json['symbol'], tim, float(json['close_price']), int(json['volume'])]
 
 def get_data(comp):
   data = robin.stocks.get_stock_historicals(comp, interval='hour', span='3month', bounds='regular', info=None)
   data = list(map(json_to_list, data))
   df = pd.DataFrame(data, columns = ['Ticker','Timestamp', 'Adj Close', 'Volume'])
+
+  data = float(robin.stocks.get_latest_price(comp)[0])
+  df = df.append({'Ticker' : comp, 'Timestamp' : 0, 'Adj Close' : data, 'Volume': 0}, ignore_index=True)
   indicators.RSI_Adj(df, 14)
   indicators.MACD(df,12,26,9)
   indicators.Stochastic(df,14,3)
